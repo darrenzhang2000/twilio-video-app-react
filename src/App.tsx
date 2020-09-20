@@ -20,6 +20,7 @@ const Main = styled('main')({
 });
 
 export default function App() {
+  const displayVid = false;
   const roomState = useRoomState();
 
   // Here we would like the height of the main container to be the height of the viewport.
@@ -29,11 +30,47 @@ export default function App() {
   // will look good on mobile browsers even after the location bar opens or closes.
   const height = useHeight();
 
+  const videos = {
+    1: '8V6IBmD1qeI',
+    2: 'rxEMKXW2Wqs',
+    3: 'kzAi0fnElCA',
+    4: 'E3ODVGAjePg',
+    5: 'WJm9zA2NY8E',
+    6: 'qfoW2PKugyk',
+    7: 'RjexvOAsVtI',
+    8: '6jHsraw2NIk',
+    9: 'vPhg6sc1Mk4',
+  };
+
+  const setVideo = (videoId: any) => {
+    return (
+      <iframe
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      ></iframe>
+    );
+  };
+
   return (
     <Container style={{ height }}>
       <MenuBar />
       <Main>
-        {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
+        {roomState === 'disconnected' ? (
+          <LocalVideoPreview />
+        ) : (
+          <div>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/Knfudi-xDAE"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></iframe>
+            <Room />
+          </div>
+        )}
+
         <Controls />
       </Main>
       <ReconnectingNotification />
